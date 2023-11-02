@@ -1,0 +1,65 @@
+/*
+ Name: Quinton Fesq
+ Date: November 2nd 2023
+ File: 10-3
+ 
+ Desription: Write a program that first asks for the number of students in a class section (with a maximum of 20 being
+ allowed) and then prompts the user for each student’s exam score, starting with student #1. Each of these
+ scores is to be stored in an array. Once all scores are entered, search the array to display the highest and lowest
+ scores, and then process the array to calculate and display the class average.
+ */
+
+#include <iostream>
+#include <iomanip> // For setting precision
+
+int main() {
+    const int maxStudents = 20;
+    int numStudents;
+
+    // Ask for the number of students with a maximum limit
+    std::cout << "Enter the number of students (maximum 20): ";
+    std::cin >> numStudents;
+
+    // Validate the number of students
+    if (numStudents <= 0 || numStudents > maxStudents) {
+        std::cout << "Invalid number of students. Please enter a number between 1 and 20." << std::endl;
+        return 1;
+    }
+
+    // Array to store exam scores
+    int scores[maxStudents];
+
+    // Input exam scores
+    for (int i = 0; i < numStudents; ++i) {
+        std::cout << "Enter exam score for student #" << i + 1 << ": ";
+        std::cin >> scores[i];
+    }
+
+    // Find the highest and lowest scores
+    int highest = scores[0];
+    int lowest = scores[0];
+
+    for (int i = 1; i < numStudents; ++i) {
+        if (scores[i] > highest) {
+            highest = scores[i];
+        }
+        if (scores[i] < lowest) {
+            lowest = scores[i];
+        }
+    }
+
+    // Calculate the class average
+    int sum = 0;
+    for (int i = 0; i < numStudents; ++i) {
+        sum += scores[i];
+    }
+    double average = static_cast<double>(sum) / numStudents;
+
+    // Display results
+    std::cout << "Highest score: " << highest << std::endl;
+    std::cout << "Lowest score: " << lowest << std::endl;
+    std::cout << std::fixed << std::setprecision(1); // Set precision to 1 decimal place
+    std::cout << "Class average: " << average << std::endl;
+
+    return 0;
+}
